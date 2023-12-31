@@ -5,8 +5,7 @@ import { registerUser } from '../redux/slices/userSlice';
 const Signup = () => {
   const dispatch = useDispatch();
   const userStatus = useSelector((state) => state.user.status);
-  const [password, setPassword] = useState('')
-  const [userData, setUserData] = useState({ name: '' });
+  const [userData, setUserData] = useState({ name: '', email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
@@ -43,10 +42,18 @@ const Signup = () => {
           className='login-input'
         />
 
+        <input
+          type="email"
+          value={userData.email}
+          onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+          placeholder="Email@example.com"
+          className='login-input'
+        />
+
         <input 
         type='password'
-        value={password}
-        onChange={(e)=>setPassword(e.target.value)} 
+        value={userData.password}
+        onChange={(e)=>setUserData({...userData, password: e.target.value})} 
         placeholder='Password'
         className='login-input'
         required
