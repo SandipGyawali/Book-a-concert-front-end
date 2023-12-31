@@ -28,13 +28,13 @@ export const registerUser = createAsyncThunk(
       const data = await response.json();
       
       if (response.ok) {
-        return data;
+        return data.status.message;
       } else {
         if (response.status === 422) {
           // Handle the case where the user already exists
-          return rejectWithValue({ error: data.error });
+          return rejectWithValue({ error: data.status.message });
         } else {
-          return rejectWithValue({ error: data.error || 'An error occurred' });
+          return rejectWithValue({ error: 'An error occurred' });
         }
       }
     } catch (error) {
