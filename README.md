@@ -37,7 +37,7 @@
 
 > Would you like to learn more?
 
-**Reserve a Concert** is a website were you can create an event or a concert, and other people can book for your event. Or you can book for the events of others.
+**Reserve a Concert** is a web platform where users can create and manage events or concerts, allowing others to book tickets for their events or attend events hosted by others. The frontend of the application is managed in this repository, while the [backend](https://github.com/Diegogagan2587/Book-a-concert-back-end) is powered by an [API built with Ruby on Rails](https://github.com/Diegogagan2587/Book-a-concert-back-end).
 
 ### Kanban Board <a id="kanban-board">
 - Take a look to the [Project Kanban Board](https://github.com/users/Diegogagan2587/projects/4/views/2)
@@ -63,6 +63,7 @@
     <li><a href="https://redux-toolkit.js.org/">Redux Toolkit</a></li>
     <li><a href="https://react-slick.neostack.com/">React Slick (for Carousel)</a></li>
     <li><a href="https://tailwindcss.com/">Tailwind</a></li>
+    <li><a href="https://jestjs.io/">Jest for Testing</a></li>
   </ul>
 </details>
 
