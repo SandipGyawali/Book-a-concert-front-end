@@ -63,6 +63,7 @@
     <li><a href="https://redux-toolkit.js.org/">Redux Toolkit</a></li>
     <li><a href="https://react-slick.neostack.com/">React Slick (for Carousel)</a></li>
     <li><a href="https://tailwindcss.com/">Tailwind</a></li>
+    <li><a href="https://jestjs.io/">Jest for Testing</a></li>
   </ul>
 </details>
 
