@@ -27,9 +27,24 @@ const AddConcertPage = () => {
   const [currentUser, setCurrentUser] = useState({});
 
   useEffect(() => {
-    fetch(`${API_URL_BASE}/current_user`)
-      .then((res) => res.json())
-      .then((data) => setCurrentUser(data));
+    if (token) {
+      fetch(`${API_URL_BASE}/current_user`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Include the token n the Authorization header
+        },
+      })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to fetch current_user data');
+      
+      })
+      .then((data) => setCurrentUser(data))
+      .catch((error) => console.error('Error:', error));
+    }
   }, []);
 
   useEffect(() => {
