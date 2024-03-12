@@ -50,6 +50,7 @@ const AddConcertPage = () => {
   useEffect(() => {
     if (concertStatus === 'succeeded') {
       setSuccessMessage('Concert created successfully!');
+      //Since the concert was created, reset the concert data to its initial state
       setConcertData(initialConcertData);
     }
   }, [concertStatus]);
