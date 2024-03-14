@@ -21,7 +21,7 @@ function ReserveConcertPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let user_id = current_user.id;
+    let user_id = current_user.data.user.id;
     let city = availableCities[0];
     let date = availableDates[0];
     let concertTitle = availableConcerts[0];

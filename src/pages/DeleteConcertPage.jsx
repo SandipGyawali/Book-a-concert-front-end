@@ -13,8 +13,10 @@ const DeleteConcertPage = () => {
 
   useEffect(() => {
     fetch(`${API_URL_BASE}/current_user/concerts`)
-      .then(res => res.json())
-      .then(data => setUserConcerts(data));
+      .then(res => {
+        res.json();
+      })
+      .then(data => setUserConcerts(data))
   }, []);
 
   useEffect(() => {
