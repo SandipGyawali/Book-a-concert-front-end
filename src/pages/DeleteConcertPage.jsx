@@ -14,8 +14,7 @@ const DeleteConcertPage = () => {
   useEffect(() => {
     fetch(`${API_URL_BASE}/current_user/concerts`)
       .then(res => {
-        response = res.json();
-        console.log(response) && response;
+        res.json();
       })
       .then(data => setUserConcerts(data))
   }, []);
