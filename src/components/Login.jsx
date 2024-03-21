@@ -33,7 +33,6 @@ const Login = () => {
           className='login-input'
           required
         />
-        
         <input
         type='password'
         value={user.password}
@@ -42,7 +41,15 @@ const Login = () => {
         className='login-input'
         required
         />
-        <button onClick={handleLogin} className='btn'>Login</button>
+        <button onClick={handleLogin} className="btn">
+          Login
+        </button>
+        {userStatus === 'loading' && (
+          <div className="loading text-red-600 flex flex-row gap-4">
+            <p>Loading...</p>
+            <div className="rounded-full w-5 h-6 border-t-4 border-green-600 animate-spin"></div>
+          </div>
+        )}
         {userStatus === 'failed' && (
           <div className='error'>
             <p>{userMessage || 'User not found'}</p>
