@@ -45,6 +45,7 @@ const Login = () => {
         <button onClick={handleLogin} className="btn">
           Login
         </button>
+        <Loading />
         {userStatus === 'loading' && (
           <Loading />
         )}
