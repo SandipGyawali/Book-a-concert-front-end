@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Login.css';
+import Loading from './Loading';
 
 const Login = () => {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -45,10 +46,7 @@ const Login = () => {
           Login
         </button>
         {userStatus === 'loading' && (
-          <div className="loading text-red-600 flex flex-row gap-4">
-            <p>Loading...</p>
-            <div className="rounded-full w-5 h-6 border-t-4 border-green-600 animate-spin"></div>
-          </div>
+          <Loading />
         )}
         {userStatus === 'failed' && (
           <div className='error'>
