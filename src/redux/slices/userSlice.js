@@ -121,7 +121,7 @@ export const userSlice = createSlice({
         state.details = action.payload;
         state.status = 'succeeded';
       })
-      .addCase(loginUser.pending, (state, action) =>{
+      .addCase(loginUser.pending, (state) =>{
         const newState = {
           status: "loading",
         }
