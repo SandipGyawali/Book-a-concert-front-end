@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../redux/slices/userSlice';
+import Loading from './Loading';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -59,6 +60,10 @@ const Signup = () => {
         required
         />
         <button onClick={handleSignup} className='btn'>Signup</button>
+
+        {userStatus === 'loading' && (
+          <Loading />
+        )}
 
         {errorMessage && (
           <div className='error'>
