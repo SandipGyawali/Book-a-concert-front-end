@@ -117,9 +117,18 @@ export const userSlice = createSlice({
       .addCase(getCurrentUser.rejected, (state) => {
         state.status = 'failed';
       })
+      .addCase(registerUser.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.details = action.payload;
         state.status = 'succeeded';
+      })
+      .addCase(loginUser.pending, (state) =>{
+        const newState = {
+          status: "loading",
+        }
+        return {...state,...newState};
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         if (action.payload.error) {

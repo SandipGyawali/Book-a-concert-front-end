@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../redux/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
 import '../stylesheets/Login.css';
+import Loading from './Loading';
 
 const Login = () => {
   const [user, setUser] = useState({ email: '', password: '' });
@@ -33,7 +34,6 @@ const Login = () => {
           className='login-input'
           required
         />
-        
         <input
         type='password'
         value={user.password}
@@ -42,7 +42,12 @@ const Login = () => {
         className='login-input'
         required
         />
-        <button onClick={handleLogin} className='btn'>Login</button>
+        <button onClick={handleLogin} className="btn">
+          Login
+        </button>
+        {userStatus === 'loading' && (
+          <Loading />
+        )}
         {userStatus === 'failed' && (
           <div className='error'>
             <p>{userMessage || 'User not found'}</p>
