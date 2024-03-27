@@ -10,6 +10,7 @@ const DeleteConcertPage = () => {
   const dispatch = useDispatch();
   const concertStatus = useSelector((state) => state.concerts.status);
   const API_URL_BASE = import.meta.env.VITE_API_URL_BASE ||'https://book-a-concert-api.onrender.com'; 
+  const token = useSelector((state) => state.user.details.token);
 
   useEffect(() => {
     fetch(`${API_URL_BASE}/current_user/concerts`)
