@@ -42,7 +42,7 @@ const DeleteConcertPage = () => {
       <h2>Delete Your Concerts</h2>
       {successMessage && <p>{successMessage}</p>}
       <ul>
-        {userConcerts.map(concert => (
+        {userConcerts && userConcerts.map(concert => (
           <li key={concert.id}>
             <span>{concert.title}</span>
             <button onClick={() => handleDelete(concert.id)}>Delete</button>
