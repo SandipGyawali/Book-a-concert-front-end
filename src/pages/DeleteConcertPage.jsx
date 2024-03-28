@@ -17,7 +17,10 @@ const DeleteConcertPage = () => {
       .then(res => {
         res.json();
       })
-      .then(data => setUserConcerts(data))
+      .then((data) => {
+        data && setUserConcerts(data);
+      })
+      .catch(err => console.error(err));
   }, []);
 
   useEffect(() => {
