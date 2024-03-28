@@ -13,7 +13,13 @@ const DeleteConcertPage = () => {
   const token = useSelector((state) => state.user.details.token);
 
   useEffect(() => {
-    fetch(`${API_URL_BASE}/current_user/concerts`)
+    fetch(`${API_URL_BASE}/current_user/concerts`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      }
+    })
       .then(res => {
         res.json();
       })
