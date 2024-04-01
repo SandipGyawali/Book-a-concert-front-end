@@ -1,4 +1,5 @@
-const API_URL_BASE = import.meta.env.VITE_API_URL_BASE ||'https://book-a-concert-api.onrender.com'; 
+// eslint-disable-next-line 
+const API_URL_BASE = process.env.VITE_API_URL_BASE ||'https://book-a-concert-api.onrender.com'; 
 // src/redux/slices/userSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -28,13 +29,13 @@ export const registerUser = createAsyncThunk(
       const data = await response.json();
       
       if (response.ok) {
-        return data;
+        return data.status.message;
       } else {
         if (response.status === 422) {
           // Handle the case where the user already exists
-          return rejectWithValue({ error: data.error });
+          return rejectWithValue({ error: data.status.message });
         } else {
-          return rejectWithValue({ error: data.error || 'An error occurred' });
+          return rejectWithValue({ error: 'An error occurred' });
         }
       }
     } catch (error) {
@@ -48,23 +49,25 @@ export const registerUser = createAsyncThunk(
 // New action to log in a user
 export const loginUser = createAsyncThunk(
   'user/loginUser',
-  async (username) => {
+  async (userData) => {
     try {
       const response = await fetch(`${API_URL_BASE}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: username }),
+        body: JSON.stringify({ user: userData }),
       });
       const data = await response.json();
-
+      const token = await data.status.token;
+      
       if (response.ok) {
-        const current_userResponse = await fetch(
-          `${API_URL_BASE}/current_user`
-        );
-        const user = await current_userResponse.json();
-        return { username: username, ...data, ...user };
+        //1. we get the token
+        if(token) {
+          return {...data.status};
+        } else {
+          return { error: "Token not found in response data"}
+        }
       } else {
         return { error: data.error || 'Login failed' };
       }
@@ -86,13 +89,13 @@ export const logoutUser = createAsyncThunk(
 export const userSlice = createSlice({
   name: 'user',
   initialState: {
-    username: '',
+    name: '',
     details: {},
     status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
   },
   reducers: {
     setUsername: (state, action) => {
-      state.username = action.payload;
+      state.name = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -115,15 +118,25 @@ export const userSlice = createSlice({
       .addCase(getCurrentUser.rejected, (state) => {
         state.status = 'failed';
       })
+      .addCase(registerUser.pending, (state) => {
+        state.status = 'loading';
+      })
       .addCase(registerUser.fulfilled, (state, action) => {
         state.details = action.payload;
         state.status = 'succeeded';
+      })
+      .addCase(loginUser.pending, (state) =>{
+        const newState = {
+          status: "loading",
+        }
+        return {...state,...newState};
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         if (action.payload.error) {
           state.status = 'failed';
         } else {
           const newState = {
+            name: action.payload.data.user.name,
             details: action.payload,
             status: 'succeeded',
           };

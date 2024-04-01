@@ -10,11 +10,22 @@ const DeleteConcertPage = () => {
   const dispatch = useDispatch();
   const concertStatus = useSelector((state) => state.concerts.status);
   const API_URL_BASE = import.meta.env.VITE_API_URL_BASE ||'https://book-a-concert-api.onrender.com'; 
+  const token = useSelector((state) => state.user.details.token);
 
   useEffect(() => {
-    fetch(`${API_URL_BASE}/current_user/concerts`)
-      .then(res => res.json())
-      .then(data => setUserConcerts(data));
+    const fetchUserConcerts = async () => {
+      const response = await fetch(`${API_URL_BASE}/current_user/concerts`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+      const data = await response.json();
+      setUserConcerts(data);
+    };
+
+    fetchUserConcerts();
   }, []);
 
   useEffect(() => {
@@ -40,12 +51,12 @@ const DeleteConcertPage = () => {
       <h2>Delete Your Concerts</h2>
       {successMessage && <p>{successMessage}</p>}
       <ul>
-        {userConcerts.map(concert => (
+        {userConcerts && userConcerts.length > 0 ? userConcerts.map(concert => (
           <li key={concert.id}>
             <span>{concert.title}</span>
             <button onClick={() => handleDelete(concert.id)}>Delete</button>
           </li>
-        ))}
+        )) : (<p>No concerts to display</p> )}
       </ul>
     </div>
   );
