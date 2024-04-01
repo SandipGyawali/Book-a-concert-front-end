@@ -17,5 +17,7 @@ test('Login Should display a Loading button', () => {
     </Provider>
   );
   const button = screen.getByText('Login');
+  const textElement = screen.getByText('BOOK A CONCERT APP');
   expect(button).toBeInTheDocument();
+  expect(textElement).toBeInTheDocument();
 });
