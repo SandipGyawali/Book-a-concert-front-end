@@ -31,8 +31,5 @@
   "ignorePatterns": [
     "dist/",
     "build/"
-  ],
-  "globals": {
-    "process": true
-  }
+  ]
 }
