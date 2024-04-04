@@ -75,9 +75,15 @@ const concertSlice = createSlice({
         state.status = 'delete_failed';
       });
 
+      builder.addCase('getConcerts/pending',(state) => {
+        const newState = { status: 'loading' };
+        return {...state, ...newState};
+      })
+
       builder.addCase('getConcerts/fulfilled', (state, action) => {
         const newState = {
           created: action.payload,
+          status: 'fulfilled',
         };
         return { ...state, ...newState };
       });
