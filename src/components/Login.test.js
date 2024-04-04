@@ -10,7 +10,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(), // Mock useNavigate as a jest function
 }));
 
-test('Login Should display a Loading button', () => {
+test('Login Page Should display a Login button and BOOK A CONCERT APP text', () => {
   render(
     <Provider store={store}>
       <Login />
