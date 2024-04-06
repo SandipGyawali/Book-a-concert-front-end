@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux'; // import the provider
 import store from '../redux/store';
 import Login from './Login';
@@ -22,6 +23,17 @@ test('Login Page Should display a Login button and BOOK A CONCERT APP text', () 
   expect(textElement).toBeInTheDocument();
 });
 
-test('Click on Login should show \'loading\' when fetching user data', ()=> {
-})
+test("Click on Login should show 'loading' when fetching user data", async () => {
+  // Arrange
+  render(
+    <Provider store={store}>
+      <Login />
+    </Provider>
+  );
+  // Act
+  const loginBtn = screen.getByText('Login');
+  await userEvent.click(loginBtn);
+  // Assert
+  expect('Loading').toBeInTheDocument;
+});
 
