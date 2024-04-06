@@ -21,3 +21,7 @@ test('Login Page Should display a Login button and BOOK A CONCERT APP text', () 
   expect(button).toBeInTheDocument();
   expect(textElement).toBeInTheDocument();
 });
+
+test('Click on Login should show \'loading\' when fetching user data', ()=> {
+})
+
