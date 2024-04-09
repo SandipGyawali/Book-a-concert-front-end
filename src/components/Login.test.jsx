@@ -2,6 +2,7 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux'; // import the provider
+import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../redux/store';
 import Login from './Login';
 
@@ -14,7 +15,9 @@ jest.mock('react-router-dom', () => ({
 test('Login Page Should display a Login button and BOOK A CONCERT APP text', () => {
   render(
     <Provider store={store}>
-      <Login />
+      <Router>
+        <Login />
+      </Router>
     </Provider>
   );
   const button = screen.getByText('Login');
