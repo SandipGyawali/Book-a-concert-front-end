@@ -8,4 +8,7 @@ export default defineConfig({
     react(),
     EnvironmentPlugin(['VITE_API_URL_BASE',]),
   ],
+  test: {
+    environment: 'jsdom',
+  }
 })
