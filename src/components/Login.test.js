@@ -37,3 +37,8 @@ test("Click on Login should show 'loading' when fetching user data", async () =>
   expect('Loading').toBeInTheDocument;
 });
 
+test('After successful login, user should be redirected to homepage', async () => {
+});
+
+test('After failed login, error message should be displayed', async () => {
+});
