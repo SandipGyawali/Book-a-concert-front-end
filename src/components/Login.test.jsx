@@ -6,12 +6,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../redux/store';
 import Login from './Login';
 
-// Mock the useNavigate hook
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(), // Mock useNavigate as a jest function
-}));
-
 test('Login Page Should display a Login button and BOOK A CONCERT APP text', () => {
   render(
     <Provider store={store}>
