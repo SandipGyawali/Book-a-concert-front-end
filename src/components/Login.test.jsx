@@ -24,14 +24,17 @@ test("Click on Login should show 'loading' when fetching user data", async () =>
   // Arrange
   render(
     <Provider store={store}>
-      <Login />
+      <Router>
+        <Login />
+      </Router>
     </Provider>
   );
   // Act
   const loginBtn = screen.getByText('Login');
   await userEvent.click(loginBtn);
+  const loading = screen.getByText('Loading...');
   // Assert
-  expect('Loading').toBeInTheDocument;
+  expect(loading).toBeInTheDocument();
 });
 
 test('After successful login, user should be redirected to homepage', async () => {
