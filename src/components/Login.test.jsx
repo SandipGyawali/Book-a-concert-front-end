@@ -38,6 +38,19 @@ test("Click on Login should show 'loading' when fetching user data", async () =>
 });
 
 test('After successful login, user should be redirected to homepage', async () => {
+  // Arrange
+  render(
+   <Provider store={store}>
+     <Router>
+       <Login />
+     </Router>
+   </Provider>
+ );
+ // Act
+ const loginBtn = screen.getByText('Login');
+ await userEvent.click(loginBtn);
+ // Assert
+ expect(window.location.pathname).toBe('/');
 });
 
 test('After failed login, error message should be displayed', async () => {
