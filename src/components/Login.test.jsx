@@ -6,6 +6,30 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../redux/store';
 import Login from './Login';
 
+const LOGIN_URL = 'http://127.0.0.1:3001/login'
+const server = setupServer(
+  http.post(LOGIN_URL, async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return HttpResponse.json({
+      status: { code: 200, message: 'Signed up successfully.' },
+      data:{
+        status: {
+          token: 'token1234',
+        },
+        attributes: {
+          id: '12',
+          email: 'luffy@mail.com',
+          name: 'luffy',
+        },
+      },
+    });
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
 test('Login Page Should display a Login button and BOOK A CONCERT APP text', () => {
   render(
     <Provider store={store}>
