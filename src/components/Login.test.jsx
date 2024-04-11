@@ -54,4 +54,23 @@ test('After successful login, user should be redirected to homepage', async () =
 });
 
 test('After failed login, error message should be displayed', async () => {
+  // Arrange
+  server.use(
+    http.post(LOGIN_URL, async () => {
+      return HttpResponse.json(null, { status: 500 });
+    })
+  );
+  render(
+    <Provider store={store}>
+      <Router>
+        <Login />
+      </Router>
+    </Provider>
+  );
+    // Act
+    const loginBtn = screen.getByText('Login');
+    await userEvent.click(loginBtn);
+
+    // Assert
+    const errorMessage = await screen.findByText('User not found');
 });
