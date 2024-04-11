@@ -73,4 +73,5 @@ test('After failed login, error message should be displayed', async () => {
 
     // Assert
     const errorMessage = await screen.findByText('User not found');
+    expect(errorMessage).toBeInTheDocument();
 });
