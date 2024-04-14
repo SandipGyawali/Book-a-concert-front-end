@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import store  from '../redux/store';
 import Signup from './Signup';
@@ -12,8 +13,18 @@ describe('Signup Component', () => {
     );
   });
 
-  it('allows users to input name', () => {
-    
+  it('allows users to input name', async () => {
+    // Arrange
+    render( 
+      <Provider store={store}>
+        <Signup />
+      </Provider>
+  );
+  // Act
+  const nameInput = screen.getByPlaceholderText('Username');
+  await userEvent.type(nameInput, 'Luffy');
+  // Assert
+  expect(nameInput).toHaveValue('Luffy');
   });
 
   it('allows users to input email', () => {
