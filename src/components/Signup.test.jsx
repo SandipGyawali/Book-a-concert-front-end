@@ -27,31 +27,31 @@ describe('Signup Component', () => {
   expect(nameInput).toHaveValue('Luffy');
   });
 
-  it('allows users to input email', () => {
+  it.skip('allows users to input email', () => {
     
   });
 
-  it('allows users to input password', () => {
+  it.skip('allows users to input password', () => {
     
   });
 
-  it('displays loading component when userStatus is loading', () => {
+  it.skip('displays loading component when userStatus is loading', () => {
     
   });
 
-  it('displays error message when registration fails', () => {
+  it.skip('displays error message when registration fails', () => {
     
   });
 
-  it('displays success message when registration succeeds', () => {
+  it.skip('displays success message when registration succeeds', () => {
     
   });
 
-  it('calls dispatch with correct data when signup button is clicked', () => {
+  it.skip('calls dispatch with correct data when signup button is clicked', () => {
     
   });
 
-  it('handles userStatus changes properly', () => {
+  it.skip('handles userStatus changes properly', () => {
     
   });
 
