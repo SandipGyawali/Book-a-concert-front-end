@@ -27,8 +27,18 @@ describe('Signup Component', () => {
   expect(nameInput).toHaveValue('Luffy');
   });
 
-  it.skip('allows users to input email', () => {
-    
+  it('allows users to input email', async () => {
+    // Arrange
+    render(
+      <Provider store={store}>
+        <Signup />
+      </Provider>
+    )
+    // Act
+    const emailInput = screen.getByPlaceholderText('Email@example.com');
+    await userEvent.type(emailInput, "luffy@pirateking.com");
+    // Assert
+    expect(emailInput).toHaveValue('luffy@pirateking.com');
   });
 
   it.skip('allows users to input password', () => {
