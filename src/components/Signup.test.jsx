@@ -41,8 +41,18 @@ describe('Signup Component', () => {
     expect(emailInput).toHaveValue('luffy@pirateking.com');
   });
 
-  it.skip('allows users to input password', () => {
-    
+  it('allows users to input password', async () => {
+    // Arrange
+    render(
+    <Provider store={store}>
+      <Signup />
+    </Provider>
+    )
+    // Act
+    const passwordInput = screen.getByPlaceholderText('Password');
+    await userEvent.type(passwordInput, "pirateKing123");
+    // Assert
+    expect(passwordInput).toHaveValue("pirateKing123");
   });
 
   it.skip('displays loading component when userStatus is loading', () => {
