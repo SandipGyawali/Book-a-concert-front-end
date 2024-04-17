@@ -55,8 +55,19 @@ describe('Signup Component', () => {
     expect(passwordInput).toHaveValue("pirateKing123");
   });
 
-  it.skip('displays loading component when userStatus is loading', () => {
-    
+  it('displays loading component when userStatus is loading', async () => {
+    // Arrange
+    render(
+      <Provider store={store}>
+        <Signup />
+      </Provider>
+    );
+    // Act
+    const signupBtn = screen.getByText('Signup');
+    await userEvent.click(signupBtn);
+    const loading = screen.getByText('Loading...');
+    // Assert
+    expect(loading).toBeInTheDocument();
   });
 
   it.skip('displays error message when registration fails', () => {
