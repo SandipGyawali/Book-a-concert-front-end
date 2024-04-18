@@ -1,8 +1,25 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { http, HttpResponse } from 'msw';
+import { setupServer } from 'msw/node';
 import { Provider } from 'react-redux';
 import store  from '../redux/store';
 import Signup from './Signup';
+
+const SIGNUP_URL = 'http://127.0.0.:3001/signup';
+const server = setupServer(
+  http.post(SIGNUP_URL, async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    return HttpResponse.json({
+      status: { code: 200, message: 'Signed up successfully.' },
+      data: {},
+    })
+  })
+)
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
 describe('Signup Component', () => {
   it('renders without crashing', () => {
@@ -70,8 +87,32 @@ describe('Signup Component', () => {
     expect(loading).toBeInTheDocument();
   });
 
-  it.skip('displays error message when registration fails', () => {
-    
+  it('displays error message when registration fails', async () => {
+    // Arrange
+    server.use(
+      http.post(SIGNUP_URL, async () => {
+        return HttpResponse.json({
+          status: { code: 422}
+        });
+      })
+    );
+    render(
+      <Provider store={store}>
+        <Signup />
+      </Provider>
+    );
+    // Act
+    const signupBtn = screen.getByText('Signup');
+    const nameInput = screen.getByPlaceholderText('Username');
+    const emailInput = screen.getByPlaceholderText('Email@example.com');
+    const passwordInput = screen.getByPlaceholderText('Password');
+    await userEvent.type(nameInput, 'Luffy');
+    await userEvent.type(emailInput, 'luffy@mail.com');
+    await userEvent.type(passwordInput, 'pirateKing');
+    await userEvent.click(signupBtn);
+    const errorMessage = await screen.findByText("User couldn't be created succesfully. Email has already been taken and Name has already been taken");
+    // Assert
+    expect(errorMessage).toBeInTheDocument();
   });
 
   it.skip('displays success message when registration succeeds', () => {
