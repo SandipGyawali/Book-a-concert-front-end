@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store  from '../redux/store';
 import Signup from './Signup';
 
-const SIGNUP_URL = 'http://127.0.0.:3001/signup';
+const SIGNUP_URL = 'http://127.0.0.1:3001/signup';
 const server = setupServer(
   http.post(SIGNUP_URL, async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -92,7 +92,7 @@ describe('Signup Component', () => {
     server.use(
       http.post(SIGNUP_URL, async () => {
         return HttpResponse.json({
-          status: { code: 422}
+          status: { message: "User couldn't be created succesfully." }
         });
       })
     );
@@ -110,7 +110,7 @@ describe('Signup Component', () => {
     await userEvent.type(emailInput, 'luffy@mail.com');
     await userEvent.type(passwordInput, 'pirateKing');
     await userEvent.click(signupBtn);
-    const errorMessage = await screen.findByText("User couldn't be created succesfully. Email has already been taken and Name has already been taken");
+    const errorMessage = await screen.findByText("User couldn't be created succesfully.");
     // Assert
     expect(errorMessage).toBeInTheDocument();
   });
