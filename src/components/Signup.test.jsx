@@ -115,8 +115,25 @@ describe('Signup Component', () => {
     expect(errorMessage).toBeInTheDocument();
   });
 
-  it.skip('displays success message when registration succeeds', () => {
-    
+  it('displays success message when registration succeeds', async () => {
+        // Arrange
+        render(
+          <Provider store={store}>
+            <Signup />
+          </Provider>
+        );
+        // Act
+        const signupBtn = screen.getByText('Signup');
+        const nameInput = screen.getByPlaceholderText('Username');
+        const emailInput = screen.getByPlaceholderText('Email@example.com');
+        const passwordInput = screen.getByPlaceholderText('Password');
+        await userEvent.type(nameInput, 'Luffy');
+        await userEvent.type(emailInput, 'luffy@mail.com');
+        await userEvent.type(passwordInput, 'pirateKing');
+        await userEvent.click(signupBtn);
+        const successMessage = await screen.findByText('Signed up successfully.');
+        // Assert
+        expect(successMessage).toBeInTheDocument();
   });
 
   it.skip('calls dispatch with correct data when signup button is clicked', () => {
