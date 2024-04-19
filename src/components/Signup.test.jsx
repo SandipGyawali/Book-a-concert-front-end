@@ -168,11 +168,5 @@ describe('Signup Component', () => {
     const successMessage = await screen.findByText('Registered | name: Luffy, email: luffy@mail.com, password: pirateKing');
     // Assert
     expect(successMessage).toBeInTheDocument();
-  });
-
-  it.skip('handles userStatus changes properly', () => {
-    
-  });
-
-  
+  });  
 });
