@@ -1,48 +1,72 @@
+import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
+import store from '../redux/store';
+import ItemDataPanel from './ItemDataPanel';
 
-it('renders without crashing', () => {
-  // Arrange
-  // Act
-  // Assert
-});
+const props = {
+  concert: {
+    title: 'Luffy Party',
+    organizer: 'Mugiwara',
+    description: 'Incredible concert with Luffy to celebrate he is pirate king.',
+    price: '100',
+    date: '2022-12-31',
+    city: 'City',
+    organizer_name: 'Mugiwara',
+  },
+};
 
-it('renders the concert title', () => {
-  // Arrange
-  // Act
-  // Assert
-});
+describe('ItemDataPanel Component', () => {
+  it('renders without crashing', () => {
+    // Arrange, Act and assert,test would fail if render throws an error
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
+  });
 
-it('renders the concert description', () => {
-  // Arrange
-  // Act
-  // Assert
-});
+  it.skip('renders the concert title', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
 
-it('renders the concert organizer name', () => {
-  // Arrange
-  // Act
-  // Assert
-});
+  it.skip('renders the concert description', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
 
-it('renders the concert date', () => {
-  // Arrange
-  // Act
-  // Assert
-});
+  it.skip('renders the concert organizer name', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
 
-it('renders the concert city', () => {
-  // Arrange
-  // Act
-  // Assert
-});
+  it.skip('renders the concert date', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
 
-it('renders the concert price', () => {
-  // Arrange
-  // Act
-  // Assert
-});
+  it.skip('renders the concert city', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
 
-it('triggers handleReserveClick when Reserve button is clicked', () => {
-  // Arrange
-  // Act
-  // Assert
+  it.skip('renders the concert price', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
+
+  it.skip('triggers handleReserveClick when Reserve button is clicked', () => {
+    // Arrange
+    // Act
+    // Assert
+  });
 });
