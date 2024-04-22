@@ -43,10 +43,20 @@ describe('ItemDataPanel Component', () => {
     expect(title).toBeInTheDocument();
   });
 
-  it.skip('renders the concert description', () => {
+  it('renders the concert description', () => {
     // Arrange
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
+    const description = 'Incredible concert with Luffy to celebrate he is pirate king.';
     // Act
+    const descriptionElement = screen.getByText(description);
     // Assert
+    expect(descriptionElement).toBeInTheDocument();
   });
 
   it.skip('renders the concert organizer name', () => {
