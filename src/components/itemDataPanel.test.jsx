@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../redux/store';
@@ -28,10 +28,19 @@ describe('ItemDataPanel Component', () => {
     );
   });
 
-  it.skip('renders the concert title', () => {
+  it('renders the concert title', () => {
     // Arrange
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
     // Act
+    const title = screen.getByText('Luffy Party');
     // Assert
+    expect(title).toBeInTheDocument();
   });
 
   it.skip('renders the concert description', () => {
