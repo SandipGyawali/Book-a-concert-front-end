@@ -59,10 +59,20 @@ describe('ItemDataPanel Component', () => {
     expect(descriptionElement).toBeInTheDocument();
   });
 
-  it.skip('renders the concert organizer name', () => {
+  it('renders the concert organizer name', () => {
     // Arrange
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
+    const organizer = 'Mugiwara';
     // Act
+    const organizerElement = screen.getByText(organizer);
     // Assert
+    expect(organizerElement).toBeInTheDocument();
   });
 
   it.skip('renders the concert date', () => {
