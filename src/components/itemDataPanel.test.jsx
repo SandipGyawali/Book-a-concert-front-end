@@ -11,7 +11,7 @@ const props = {
     description: 'Incredible concert with Luffy to celebrate he is pirate king.',
     price: '100',
     date: '2022-12-31',
-    city: 'City',
+    city: 'Sky Island',
     organizer_name: 'Mugiwara',
   },
 };
@@ -91,10 +91,20 @@ describe('ItemDataPanel Component', () => {
     expect(dateElement).toBeInTheDocument();
   });
 
-  it.skip('renders the concert city', () => {
+  it('renders the concert city', () => {
     // Arrange
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
+    const city = 'Sky Island';
     // Act
+    const cityElement = screen.getByText(city);
     // Assert
+    expect(cityElement).toBeInTheDocument();
   });
 
   it.skip('renders the concert price', () => {
