@@ -75,10 +75,20 @@ describe('ItemDataPanel Component', () => {
     expect(organizerElement).toBeInTheDocument();
   });
 
-  it.skip('renders the concert date', () => {
+  it('renders the concert date', () => {
     // Arrange
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
+    const date = '2022-12-31';
     // Act
+    const dateElement = screen.getByText(date);
     // Assert
+    expect(dateElement).toBeInTheDocument();
   });
 
   it.skip('renders the concert city', () => {
