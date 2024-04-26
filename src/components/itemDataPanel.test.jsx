@@ -107,10 +107,20 @@ describe('ItemDataPanel Component', () => {
     expect(cityElement).toBeInTheDocument();
   });
 
-  it.skip('renders the concert price', () => {
+  it('renders the concert price', () => {
     // Arrange
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
+    const price = '100';
     // Act
+    const priceElement = screen.getByText(price);
     // Assert
+    expect(priceElement).toBeInTheDocument();
   });
 
   it.skip('triggers handleReserveClick when Reserve button is clicked', () => {
