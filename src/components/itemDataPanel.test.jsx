@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from '../redux/store';
 import ItemDataPanel from './ItemDataPanel';
+import { act } from 'react-dom/test-utils';
 
 const props = {
   concert: {
@@ -123,9 +124,25 @@ describe('ItemDataPanel Component', () => {
     expect(priceElement).toBeInTheDocument();
   });
 
-  it.skip('triggers handleReserveClick when Reserve button is clicked', () => {
+  it('redirects to \'reserve\'  when Reserve button is clicked', async () => {
     // Arrange
+    render(
+      <Provider store={store}>
+        <Router>
+          <ItemDataPanel concert={props.concert}/>
+        </Router>
+      </Provider>
+    );
     // Act
+    const reserveButton = screen.getByText('Reserve');
+    act(()=>{ 
+      /*act is used to wrap the click event because reserve button 
+      fires event that update state, this is to ensure that we are testing the behavior
+      the user would see in the browser
+      */
+      reserveButton.click();
+    }) 
     // Assert
+    expect(window.location.pathname).toBe('/reserve');
   });
 });
