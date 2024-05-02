@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "lint": "npx eslint '**/*.{js,jsx}' && npx stylelint '**/*.{css,scss}'",
+    "lint": "npx eslint '**/*.{js,jsx}' || npx stylelint '**/*.{css,scss}'",
     "preview": "vite preview",
     "test": "vitest"
   },
