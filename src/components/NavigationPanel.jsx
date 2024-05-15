@@ -33,9 +33,9 @@ function NavigationPanel() {
       </div>
       <ul
         className={`
-         flex flex-col sm:justify-center sm:gap-6
+         flex flex-col sm:justify-between sm:gap-6
          px-2
-         overflow-hidden
+         overflow-scroll scrollbar-hide
          md:w-full absolute sm:relative bg-white h-screen 
          ${!isNavOpen && "sm:flex"}
          z-40
@@ -45,11 +45,11 @@ function NavigationPanel() {
          font-bold text-xl sm:text-md uppercase text-gray-600
        `}
       >
-        <a href="http://localhost:5173" className="site-logo absolute top-10">
+        <a href="/" className="site-logo mt-4">
           <img src={Logo} alt="nav-logo" className="w-64 h-fit" />
         </a>
 
-        <div className="absolute top-52 w-full">
+        <div className="top-52 w-full">
           <li>
             <Link
               to="/"
@@ -122,7 +122,7 @@ function NavigationPanel() {
             </>
           )}
         </div>
-        <div className="nav-footer absolute w-full flex flex-col gap-6 bottom-10 right-2 text-gray-600 capitalize">
+        <div className="nav-footer w-full flex flex-col gap-6 mb-4 text-gray-600 capitalize">
           <div className="logo flex w-full flex justify-center gap-4">
             <Icon icon="prime:twitter" />
             <Icon icon="ri:facebook-fill" />
